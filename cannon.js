@@ -50,6 +50,8 @@ var numTargets = numBallsFired = totalBallsFired = totalTargets = 0;
 var woodTexture, textMaterial, targetPlatformMaterial, targetGeometry, targetMaterial, cannonTexture, ballTexture,
     ballGeometry, ballMaterial, cannonSound;
 
+var audio;
+
 var oceanTexture, oceanHeightMapScene, oceanHeightMap, oceanHeightMapCamera;
 var uniformsNoise = {
     time: { type: "f", value: 1.0 },
@@ -357,9 +359,14 @@ function initScene() {
     camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 1000);
 
     // muzyka
-    var audio = new Audio('resources/pirates.mp3');
+    audio = new Audio('resources/pirates.mp3');
     audio.volume = 0.3;
-    audio.play();
+    audio.muted = false;
+
+    document.documentElement.onclick = function() {
+        if (audio.paused)
+            audio.play();
+    }
 
     addOceanPlane();
     addCannon();
