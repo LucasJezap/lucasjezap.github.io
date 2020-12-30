@@ -1,4 +1,5 @@
 // globalne stałe
+// wszystkie nazwy mówią za siebie
 var HEIGHT_OF_PLATFORM = 20;
 var CANNON_SIZE = 10;
 var TARGET_SIZE = 10;
@@ -15,12 +16,16 @@ var SPLASH_PARABOLA_FACTOR = 2.5, SPLASH_Y_FACTOR = 2, SPLASH_X_FACTOR = 4;
 var SPLASH_NUM_OF_PARTICLES = 20;
 
 // definicja poziomów
+// zawartość to pudełka widziane z lotu ptaka (liczba to wysokość)
 var LEVELS = [
     [
         '1'
     ],
     [
         'f'
+    ],
+    [
+        '5 5 5'
     ],
     [
         '3   3   3',
@@ -41,10 +46,15 @@ var LEVELS = [
 
 
 // zmienne globalne
+// nazwy dobrze opisują ich działanie
 var camera, scene, renderer;
+
 var mousePosition = { x: 0.5, y: 0.5 };
+
 var cannon, cannonDirection = new THREE.Vector3(), lastShotTime;
+
 var levelIndex, levelStartTime, alreadyWon, gameStarted;
+
 var numTargets = numBallsFired = totalBallsFired = totalTargets = 0;
 
 var woodTexture, textMaterial, targetPlatformMaterial, targetGeometry, targetMaterial, cannonTexture, ballTexture,
@@ -53,6 +63,7 @@ var woodTexture, textMaterial, targetPlatformMaterial, targetGeometry, targetMat
 var audio;
 
 var oceanTexture, oceanHeightMapScene, oceanHeightMap, oceanHeightMapCamera;
+
 var uniformsNoise = {
     time: { type: "f", value: 1.0 },
     scale: { type: "v2", value: new THREE.Vector2(1.5, 1.5) },
@@ -67,12 +78,14 @@ function interpolate(low, high, interpolationFactor) {
 
 // obliczanie czasu
 function secondsSince(time) {
+    // ilość sekund od czasu time
     return (window.performance.now() - time) / 1000;
 }
 
 // usuwanie obiektów ze sceny
 function removeObjects(condition) {
     var objectsToRemove = scene.children.filter(condition);
+    // usuwamy wszystkie obiekty spełniające warunek
     objectsToRemove.forEach(function (object) {
         scene.remove(object);
     });
@@ -84,6 +97,7 @@ function AudioPool(url, volume, numCopies) {
     this.poolIndex = 0;
     this.poolSize = numCopies;
 
+    // tworzymy n kopii
     for (var i = 0; i < numCopies; i++) {
         var audio = new Audio(url);
         audio.volume = volume;
@@ -93,6 +107,7 @@ function AudioPool(url, volume, numCopies) {
     }
 }
 
+// funkcja prototypowa odtwarzająca muzykę
 AudioPool.prototype.play = function () {
     this.pool[this.poolIndex].play();
     this.poolIndex = (this.poolIndex + 1) % this.poolSize;
@@ -112,6 +127,7 @@ function addOceanPlane() {
         fog: true
     });
 
+    // mapa wysokości
     oceanHeightMapScene = new THREE.Scene();
 
     var plane = new THREE.PlaneBufferGeometry(window.innerWidth, window.innerHeight);
@@ -129,7 +145,8 @@ function addOceanPlane() {
         { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBFormat });
     oceanHeightMap.generateMipmaps = false;
     renderer.render(oceanHeightMapScene, oceanHeightMapCamera, oceanHeightMap, true);
-
+    
+    // tworzymy ocean
     var oceanGeometry = new THREE.PlaneBufferGeometry(2000, 2000, 256, 256);
     var oceanMaterial = new THREE.MeshPhongMaterial({ map: oceanTexture, displacementMap: oceanHeightMap, displacementScale: HEIGHT_OF_PLATFORM });
     var ocean = new THREE.Mesh(oceanGeometry, oceanMaterial);
@@ -170,6 +187,7 @@ function addCannon() {
 
     cannon.add(cylinder);
 
+    // ustawiamy działo
     cannon.rotation.x = Math.PI / 4;
     cannon.position.y = HEIGHT_OF_PLATFORM + 2;
     cannon.position.z = -5;
@@ -184,13 +202,14 @@ function createTarget() {
     target.isTarget = true;
     target.removeIfUnderwater = true;
     target.castShadow = true;
-    target.splashes = true;
+    target.splashes = true; // chcemy efekt chlapania wody
 
     return target;
 }
 
 // Dodanie pudełek do sceny
 function addTargets(targetConfiguration) {
+    // obliczenia wstępne
     var numRows = targetConfiguration.length;
     var rowLengths = targetConfiguration.map(function (row) { return row.length; });
     var numColumns = Math.max.apply(null, rowLengths);
@@ -217,6 +236,7 @@ function addTargets(targetConfiguration) {
     // dodanie pudełek
     numTargets = 0;
     for (var row = 0; row < numRows; row++) {
+        // obliczamy pozycje każdego pudełka (x,y,z)
         var z = backSide - row * TARGET_SIZE - TARGET_SIZE / 2;
 
         for (var column = 0; column < numColumns; column++) {
@@ -251,6 +271,7 @@ function unfreezeTargets() {
     var one = new THREE.Vector3(1, 1, 1);
 
     scene.children.forEach(function (object) {
+        // tylko odpowiednie obiekty
         if (object.isTarget === true) {
             object.setAngularFactor(one);
             object.setLinearFactor(one);
@@ -264,15 +285,17 @@ function createBall() {
     ball.castShadow = true;
     ball.removeIfUnderwater = true;
     ball.removeBeforeLevel = true;
-    ball.splashes = true;
+    ball.splashes = true;  // chcemy efekt chlapania wody
 
     return ball;
 }
 
 // strzał piłką
 function shootBall() {
+    // odmrażamy pudełka
     unfreezeTargets();
 
+    // tworzymy nową piłkę
     var ball = createBall();
     ball.position.copy(cannon.position);
 
@@ -289,10 +312,12 @@ function shootBall() {
 
 // chlapanie wody po wpadnięciu obiektu
 function addSplash(position, velocity) {
+    // pomocniczna funkcja
     var random = function () {
         return Math.random() * SPLASH_POSITION_RANDOMNESS - SPLASH_POSITION_RANDOMNESS / 2;
     }
 
+    // tworzymy odpowiednią ilość plusków wody
     for (var i = 0; i < SPLASH_NUM_OF_PARTICLES; i++) {
         var sprite = new THREE.Sprite(spriteMaterial);
         sprite.isSplashSprite = true;
@@ -340,6 +365,7 @@ function loadResources() {
 
 // inicjalizacja sceny
 function initScene() {
+    // scena
     scene = new Physijs.Scene();
     scene.fog = new THREE.Fog(SKY_COLOR, 1, 1000);
     scene.setGravity(new THREE.Vector3(0, -GRAVITY, 0));
@@ -356,6 +382,7 @@ function initScene() {
     light.shadowMapWidth = light.shadowMapHeight = 1024;
     scene.add(light);
 
+    // kamera
     camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 1000);
 
     // muzyka
@@ -366,6 +393,7 @@ function initScene() {
             audio.play();
     }
 
+    // dodajemy morze i armate
     addOceanPlane();
     addCannon();
 }
@@ -408,8 +436,10 @@ function initEvents() {
 
 // funkcja inicjalizująca 
 function init(containerElement) {
+    // ładujemy tekstury
     loadResources();
 
+    // renderer
     renderer = new THREE.WebGLRenderer();
     renderer.setClearColor(SKY_COLOR, 1.0);
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -422,6 +452,7 @@ function init(containerElement) {
 
     document.getElementById('game-start-dialog').style.display = 'block';
 
+    // rozpoczynamy grę
     scene.simulate();
     render();
 }
@@ -434,6 +465,7 @@ function startNextLevel() {
     levelIndex += 1;
     levelStartTime = window.performance.now();
 
+    // sprawdzanie czy gra zakończona
     if (levelIndex >= LEVELS.length) {
         gameWon();
 
@@ -513,8 +545,9 @@ function dropRandomTarget() {
     scene.add(target);
 }
 
-// przesuwanie działem
+// manipulacja działem
 function updateCannon() {
+    // przesuwanie działa
     cannon.rotation.z = interpolate(-Math.PI / 4, Math.PI / 4, mousePosition.x);
     cannon.rotation.x = interpolate(Math.PI / 8, Math.PI / 2, mousePosition.y);
     cannonDirection.set(0, 1, 0);
@@ -567,9 +600,11 @@ function updateSplashes() {
 
     // przesuwanie cząstek wody po paraboli
     scene.children.forEach(function (object) {
+        // tylko obiektów splashsprite
         if (object.isSplashSprite === true) {
             var sprite = object;
 
+            // przesuwanie zależnie od upłyniętego czasu
             var t = secondsSince(sprite.startTime) * 10;
             sprite.position.x = sprite.splashIntensity * SPLASH_X_FACTOR * t;
             sprite.position.y = sprite.splashIntensity * SPLASH_Y_FACTOR *
