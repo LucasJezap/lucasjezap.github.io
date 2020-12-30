@@ -359,9 +359,8 @@ function initScene() {
     camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 1000);
 
     // muzyka
-    audio = new Audio('resources/pirates.mp3');
-    audio.volume = 0.3;
-
+    audio = new Audio('resources/song.mp3');
+    audio.volume = 0.1;
     document.documentElement.onclick = function() {
         if (audio.paused)
             audio.play();
