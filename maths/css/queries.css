@@ -1,0 +1,12 @@
+@media (max-width: 991px) {
+    .container {
+        text-align: center;
+    }
+    #logo {
+        float: initial;
+    }
+    #main_p {
+        margin-left: 0%;
+    }
+    
+}
