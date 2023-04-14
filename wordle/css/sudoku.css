@@ -1,0 +1,181 @@
+/*noinspection CssUnknownTarget*/
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: "Montserrat", sans-serif;
+}
+
+#container {
+  display: flex;
+  background-color: #272727;
+  height: 100%;
+  align-items: center;
+  flex-direction: column;
+}
+
+#game {
+  width: 100%;
+  max-width: 500px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  border-bottom: 1px solid rgb(58, 58, 60);
+}
+
+.title {
+  color: gainsboro;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0.4rem 0 0.4rem 0;
+  text-align: center;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+  "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+#board-container {
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+#board {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(9, 1fr);
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.square {
+  border: 2px solid rgb(58, 58, 60);
+  aspect-ratio: 1;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: gainsboro;
+  text-transform: uppercase;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.square:nth-child(9n+1) {
+  border-left: 2px solid rgb(129, 131, 132);
+}
+
+.square:nth-child(9n+3),
+.square:nth-child(9n+6),
+.square:nth-child(9n) {
+  border-right: 2px solid rgb(129, 131, 132);
+}
+
+.square:nth-child(27n+1),
+.square:nth-child(27n+2),
+.square:nth-child(27n+3),
+.square:nth-child(27n+4),
+.square:nth-child(27n+5),
+.square:nth-child(27n+6),
+.square:nth-child(27n+7),
+.square:nth-child(27n+8),
+.square:nth-child(27n+9) {
+  border-top: 2px solid rgb(129, 131, 132);
+}
+
+.square:nth-child(27n+19),
+.square:nth-child(27n+20),
+.square:nth-child(27n+21),
+.square:nth-child(27n+22),
+.square:nth-child(27n+23),
+.square:nth-child(27n+24),
+.square:nth-child(27n+25),
+.square:nth-child(27n+26),
+.square:nth-child(27n)
+{
+  border-bottom: 2px solid rgb(129, 131, 132);
+}
+
+#keyboard-container {
+  height: 15%;
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto 8px;
+  touch-action: manipulation;
+}
+
+.keyboard-row button {
+  font-family: inherit;
+  font-weight: bold;
+  border: 0;
+  padding: 0;
+  height: 59px;
+  cursor: pointer;
+  background-color: rgb(129, 131, 132);
+  color: rgb(215, 218, 220);
+  flex-grow: 1;
+  text-transform: uppercase;
+  margin-right: 6px;
+  border-radius: 4px;
+  user-select: none;
+}
+
+.keyboard-row button.wide-button {
+  flex-grow: 1.5;
+}
+
+.spacer-half {
+  flex-grow: 0.5;
+}
+
+span#failed {
+  min-height: 25px;
+  display: inline;
+  font-size: large;
+  text-align: center;
+  color: red;
+}
+
+a#refresh_a {
+  display: inline;
+  color: #f6f4e6;
+  min-height: 150px;
+  font-size: 100px;
+  text-align: center;
+}
+
+span#refresh_s {
+  display: inline;
+  color: #f6f4e6;
+  min-height: 150px;
+  font-size: 100px;
+  text-align: center;
+}
+
+.top_right {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}
+
+#home {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  width: 5%;
+  -webkit-filter: invert(50%);
+}

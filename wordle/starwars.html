@@ -1,0 +1,95 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>Star Wars</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="apple-touch-icon" href="img/icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/starwars.css">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+<div id="container">
+  <div id="game">
+    <header>
+      <h1 class="title">WORDLE STAR WARS</h1>
+    </header>
+
+    <a href="mainPage.html"><img src="img/home.png" alt="home" id="home"/></a>
+
+    <a id="refresh_a" href="#"><span id="refresh_s"></span></a>
+    <span id="failed"></span>
+
+    <div id="board-container">
+      <div id="board"></div>
+    </div>
+
+    <div id="keyboard-container">
+      <div class="keyboard-row">
+        <button data-key="0">0</button>
+        <button data-key="1">1</button>
+        <button data-key="2">2</button>
+        <button data-key="3">3</button>
+        <button data-key="4">4</button>
+        <button data-key="5">5</button>
+        <button data-key="6">6</button>
+        <button data-key="7">7</button>
+        <button data-key="8">8</button>
+        <button data-key="9">9</button>
+      </div>
+      <div class="keyboard-row">
+        <button data-key="q">q</button>
+        <button data-key="w">w</button>
+        <button data-key="e">e</button>
+        <button data-key="r">r</button>
+        <button data-key="t">t</button>
+        <button data-key="y">y</button>
+        <button data-key="u">u</button>
+        <button data-key="i">i</button>
+        <button data-key="o">o</button>
+        <button data-key="p">p</button>
+      </div>
+      <div class="keyboard-row">
+        <div class="spacer-half"></div>
+        <button data-key="a">a</button>
+        <button data-key="s">s</button>
+        <button data-key="d">d</button>
+        <button data-key="f">f</button>
+        <button data-key="g">g</button>
+        <button data-key="h">h</button>
+        <button data-key="j">j</button>
+        <button data-key="k">k</button>
+        <button data-key="l">l</button>
+        <div class="spacer-half"></div>
+      </div>
+      <div class="keyboard-row">
+        <button data-key="enter" class="wide-button">Enter</button>
+        <button data-key="z">z</button>
+        <button data-key="x">x</button>
+        <button data-key="c">c</button>
+        <button data-key="v">v</button>
+        <button data-key="b">b</button>
+        <button data-key="n">n</button>
+        <button data-key="m">m</button>
+        <button data-key="del" class="wide-button">Del</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/starwars.js"></script>
+<script src="js/main.js"></script>
+</body>
+
+</html>

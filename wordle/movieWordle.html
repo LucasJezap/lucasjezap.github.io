@@ -1,0 +1,61 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>Movie Wordle</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="apple-touch-icon" href="img/icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/movieWordle.css">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+<div id="container">
+  <div id="game">
+    <header>
+      <h1 class="title">GUESS THE MOVIE</h1>
+    </header>
+
+    <div class="checkbox-wrapper-1">
+      <input id="checkbox" class="substituted" type="checkbox" aria-hidden="true" onchange="hideOrShowPoster()"/>
+      <label for="checkbox" class="substituted" style="color: gainsboro">Hide poster</label>
+    </div>
+
+    <a href="mainPage.html"><img src="img/home.png" alt="home" id="home"/></a>
+
+    <a id="refresh_a" href="#"><span id="refresh_s"></span></a>
+    <span id="failed"></span>
+
+    <div id="poster_form">
+      <img src="#" alt="poster" id="poster">
+      <div>
+        <form id="movie_form">
+          <label for="movie"></label>
+          <input list="movie_data" id="movie" name="movie"/>
+          <datalist id="movie_data"></datalist>
+          <button type="submit" id="submit">GUESS</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="board-container">
+      <div id="board"></div>
+    </div>
+  </div>
+</div>
+
+<script src="js/movieWordle.js"></script>
+<script src="js/main.js"></script>
+</body>
+
+</html>

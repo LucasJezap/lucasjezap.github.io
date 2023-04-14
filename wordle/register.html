@@ -1,0 +1,47 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>Register</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="apple-touch-icon" href="img/icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/login.css">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+<div class="container">
+  <section id="content">
+    <form action="javascript:register()">
+      <h1>Register Form</h1>
+      <div>
+        <label for="username"></label><input type="text" placeholder="Username" required="" id="username">
+      </div>
+      <div>
+        <label for="password"></label><input type="password" placeholder="Password" required="" id="password">
+      </div>
+      <div>
+        <label for="password2"></label><input type="password" placeholder="Confirm Password" required="" id="password2">
+      </div>
+      <div>
+        <input type="submit" value="Register">
+      </div>
+      <div>
+        <a href="index.html">Back</a>
+      </div>
+    </form><!-- form -->
+    <span id="failed"></span>
+  </section><!-- content -->
+</div><!-- container -->
+
+<script src="js/login.js"></script>
+<script src="js/main.js"></script>
+</body>
+
+</html>

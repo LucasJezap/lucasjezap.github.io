@@ -1,0 +1,305 @@
+/*noinspection CssUnknownTarget*/
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #272727;
+  font-family: "Montserrat", sans-serif;
+}
+
+.navMenu {
+  position: fixed;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.navMenu a {
+  text-align: center;
+  color: #f6f4e6;
+  text-decoration: none;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  display: block;
+  max-width: 100%;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  margin: 10px;
+}
+
+.navMenu a:before {
+  content: '\a';
+  white-space: pre;
+}
+
+.navMenu a:hover {
+  color: #fddb3a;
+}
+
+header {
+  border-bottom: 1px solid rgb(58, 58, 60);
+}
+
+.title {
+  color: gainsboro;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0.4rem 0 0.4rem 0;
+  text-align: center;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+  "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+@keyframes rotateScene {
+  0% {
+    transform: rotateX(0) rotateY(0) rotateZ(0);
+  }
+  50% {
+    transform: rotateX(180deg) rotateY(360deg) rotateZ(360deg);
+  }
+  100% {
+    transform: rotateX(360deg) rotateY(720deg) rotateZ(720deg);
+  }
+}
+
+.container {
+  position: absolute;
+  display: flex;
+  width: 0;
+  height: 0;
+  top: 25%;
+  left: 50%;
+  transform-style: preserve-3d;
+  animation: rotateScene 30s linear infinite;
+}
+
+.cube {
+  width: 4em;
+  height: 4em;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: -2em;
+  margin-top: -2em;
+  transform-style: preserve-3d;
+}
+
+.cube > .side {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  background: #444;
+  position: absolute;
+  box-shadow: inset 0 0 12px 0 #000, inset 0 0 0 6px #444;
+}
+
+.cube > .side.front {
+  transform: translateZ(2em);
+}
+
+.cube > .side.back {
+  transform: translateZ(-2em) rotateX(180deg);
+}
+
+.cube > .side.left {
+  transform: translateX(-2em) rotateY(-90deg);
+}
+
+.cube > .side.right {
+  transform: translateX(2em) rotateY(90deg);
+}
+
+.cube > .side.top {
+  transform: translateY(-2em) rotateX(90deg);
+}
+
+.cube > .side.bottom {
+  transform: translateY(2em) rotateX(-90deg);
+}
+
+.cube.middle.white {
+  transform: translateY(-4em);
+}
+
+.cube.middle.red {
+  transform: translateZ(4em);
+}
+
+.cube.middle.green {
+  transform: translateX(-4em);
+}
+
+.cube.middle.orange {
+  transform: translateZ(-4em);
+}
+
+.cube.middle.blue {
+  transform: translateX(4em);
+}
+
+.cube.middle.yellow {
+  transform: translateY(4em);
+}
+
+.cube.corner.corner-white-red-green {
+  transform: translateX(-4em) translateZ(4em) translateY(-4em);
+}
+
+.cube.corner.corner-white-green-orange {
+  transform: translateX(-4em) translateZ(-4em) translateY(-4em);
+}
+
+.cube.corner.corner-white-orange-blue {
+  transform: translateX(4em) translateZ(-4em) translateY(-4em);
+}
+
+.cube.corner.corner-white-blue-red {
+  transform: translateX(4em) translateZ(4em) translateY(-4em);
+}
+
+.cube.corner.corner-yellow-red-green {
+  transform: translateX(-4em) translateZ(4em) translateY(4em);
+}
+
+.cube.corner.corner-yellow-green-orange {
+  transform: translateX(-4em) translateZ(-4em) translateY(4em);
+}
+
+.cube.corner.corner-yellow-orange-blue {
+  transform: translateX(4em) translateZ(-4em) translateY(4em);
+}
+
+.cube.corner.corner-yellow-blue-red {
+  transform: translateX(4em) translateZ(4em) translateY(4em);
+}
+
+.cube.edge.edge-white-red {
+  transform: translateZ(4em) translateY(-4em);
+}
+
+.cube.edge.edge-white-green {
+  transform: translateX(-4em) translateY(-4em);
+}
+
+.cube.edge.edge-white-blue {
+  transform: translateX(4em) translateY(-4em);
+}
+
+.cube.edge.edge-white-orange {
+  transform: translateZ(-4em) translateY(-4em);
+}
+
+.cube.edge.edge-red-green {
+  transform: translateX(-4em) translateZ(4em);
+}
+
+.cube.edge.edge-green-orange {
+  transform: translateX(-4em) translateZ(-4em);
+}
+
+.cube.edge.edge-orange-blue {
+  transform: translateX(4em) translateZ(-4em);
+}
+
+.cube.edge.edge-blue-red {
+  transform: translateX(4em) translateZ(4em);
+}
+
+.cube.edge.edge-yellow-red {
+  transform: translateZ(4em) translateY(4em);
+}
+
+.cube.edge.edge-yellow-green {
+  transform: translateX(-4em) translateY(4em);
+}
+
+.cube.edge.edge-yellow-orange {
+  transform: translateZ(-4em) translateY(4em);
+}
+
+.cube.edge.edge-yellow-blue {
+  transform: translateX(4em) translateY(4em);
+}
+
+.cube.corner.corner-white-red-green > .side.top,
+.cube.corner.corner-white-green-orange > .side.top,
+.cube.corner.corner-white-orange-blue > .side.top,
+.cube.corner.corner-white-blue-red > .side.top,
+.cube.edge.edge-white-red > .side.top,
+.cube.edge.edge-white-green > .side.top,
+.cube.edge.edge-white-orange > .side.top,
+.cube.edge.edge-white-blue > .side.top,
+.cube.middle.white > .side.top {
+  background: white;
+}
+
+.cube.corner.corner-yellow-red-green > .side.bottom,
+.cube.corner.corner-yellow-green-orange > .side.bottom,
+.cube.corner.corner-yellow-orange-blue > .side.bottom,
+.cube.corner.corner-yellow-blue-red > .side.bottom,
+.cube.edge.edge-yellow-red > .side.bottom,
+.cube.edge.edge-yellow-green > .side.bottom,
+.cube.edge.edge-yellow-orange > .side.bottom,
+.cube.edge.edge-yellow-blue > .side.bottom,
+.cube.middle.yellow > .side.bottom {
+  background: yellow;
+}
+
+.cube.corner.corner-white-red-green > .side.front,
+.cube.corner.corner-white-blue-red > .side.front,
+.cube.corner.corner-yellow-red-green > .side.front,
+.cube.corner.corner-yellow-blue-red > .side.front,
+.cube.edge.edge-white-red > .side.front,
+.cube.edge.edge-red-green > .side.front,
+.cube.edge.edge-blue-red > .side.front,
+.cube.edge.edge-yellow-red > .side.front,
+.cube.middle.red > .side.front {
+  background: red;
+}
+
+.cube.corner.corner-white-red-green > .side.left,
+.cube.corner.corner-white-green-orange > .side.left,
+.cube.corner.corner-yellow-red-green > .side.left,
+.cube.corner.corner-yellow-green-orange > .side.left,
+.cube.edge.edge-white-green > .side.left,
+.cube.edge.edge-red-green > .side.left,
+.cube.edge.edge-green-orange > .side.left,
+.cube.edge.edge-yellow-green > .side.left,
+.cube.middle.green > .side.left {
+  background: green;
+}
+
+.cube.corner.corner-white-green-orange > .side.back,
+.cube.corner.corner-white-orange-blue > .side.back,
+.cube.corner.corner-yellow-green-orange > .side.back,
+.cube.corner.corner-yellow-orange-blue > .side.back,
+.cube.edge.edge-white-orange > .side.back,
+.cube.edge.edge.edge-green-orange > .side.back,
+.cube.edge.edge-orange-blue > .side.back,
+.cube.edge.edge-yellow-orange > .side.back,
+.cube.middle.orange > .side.back {
+  background: orange;
+}
+
+.cube.corner.corner-white-orange-blue > .side.right,
+.cube.corner.corner-white-blue-red > .side.right,
+.cube.corner.corner-yellow-orange-blue > .side.right,
+.cube.corner.corner-yellow-blue-red > .side.right,
+.cube.edge.edge-white-blue > .side.right,
+.cube.edge.edge-orange-blue > .side.right,
+.cube.edge.edge-blue-red > .side.right,
+.cube.edge.edge-yellow-blue > .side.right,
+.cube.middle.blue > .side.right {
+  background: blue;
+}
+
